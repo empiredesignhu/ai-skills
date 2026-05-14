@@ -1,0 +1,234 @@
+{
+  "$comment": "Canonical block types for alfred-plan. Maps to builder-specific widgets. The executor (alfred-build) performs the final mapping — the planner only uses canonical types.",
+  "version": "1.0",
+
+  "canonical_types": {
+    "heading": {
+      "description": "A title or subtitle text element (h1-h6)",
+      "html_signals": ["h1", "h2", "h3", "h4", "h5", "h6", ".heading", ".title", ".headline"],
+      "figma_signals": ["Heading", "Title", "H1", "H2", "Headline"],
+      "visual_signals": ["large bold text at top of section or column"],
+      "elementor_widget": "heading",
+      "gutenberg_block": "core/heading",
+      "bricks_element": "heading"
+    },
+    "text": {
+      "description": "Body text, paragraphs, descriptions",
+      "html_signals": ["p", ".text", ".body", ".description", ".excerpt", ".content"],
+      "figma_signals": ["Body", "Paragraph", "Text", "Description"],
+      "visual_signals": ["multi-line body text, readable font size, normal weight"],
+      "elementor_widget": "text-editor",
+      "gutenberg_block": "core/paragraph",
+      "bricks_element": "text"
+    },
+    "image": {
+      "description": "Standalone image element",
+      "html_signals": ["img", "picture", ".img-wrap", ".photo", ".thumbnail"],
+      "figma_signals": ["Image", "Photo", "Thumbnail", "Picture"],
+      "visual_signals": ["rectangular image zone, no text overlay, not a background"],
+      "elementor_widget": "image",
+      "gutenberg_block": "core/image",
+      "bricks_element": "image"
+    },
+    "button": {
+      "description": "Clickable call-to-action element",
+      "html_signals": ["button", "a.btn", "a.button", ".cta", "[role=button]"],
+      "figma_signals": ["Button", "CTA", "Action", "Primary Button", "Secondary Button"],
+      "visual_signals": ["bordered or filled pill/rectangle with short text label"],
+      "elementor_widget": "button",
+      "gutenberg_block": "core/button",
+      "bricks_element": "button"
+    },
+    "form": {
+      "description": "Input form with one or more fields",
+      "html_signals": ["form", ".form", ".contact-form", ".newsletter"],
+      "figma_signals": ["Form", "Contact Form", "Newsletter", "Input Group"],
+      "visual_signals": ["input fields, labels, submit button grouped together"],
+      "elementor_widget": "form",
+      "gutenberg_block": "gravityforms/form or contact-form-7/contact-form-selector",
+      "bricks_element": "form",
+      "note": "Always flag the form plugin as an important question"
+    },
+    "gallery": {
+      "description": "Grid of multiple images",
+      "html_signals": [".gallery", ".grid", ".masonry", "[data-gallery]"],
+      "figma_signals": ["Gallery", "Photo Grid", "Image Grid"],
+      "visual_signals": ["multiple images in a grid layout, equal or masonry sizing"],
+      "elementor_widget": "image-gallery",
+      "gutenberg_block": "core/gallery",
+      "bricks_element": "gallery"
+    },
+    "slider": {
+      "description": "Horizontally scrolling/cycling content carousel",
+      "html_signals": [".slider", ".carousel", ".swiper", ".splide", "[data-slick]"],
+      "figma_signals": ["Slider", "Carousel", "Swipe", "Testimonial Slider"],
+      "visual_signals": ["single item visible with nav arrows or dots, multiple items hinted"],
+      "elementor_widget": "image-carousel or testimonial-carousel",
+      "gutenberg_block": "core/cover (fallback) or plugin block",
+      "bricks_element": "slider"
+    },
+    "video": {
+      "description": "Embedded video player (YouTube, Vimeo, or self-hosted)",
+      "html_signals": ["video", "iframe[src*=youtube]", "iframe[src*=vimeo]", ".video-wrap"],
+      "figma_signals": ["Video", "Video Player", "YouTube", "Vimeo"],
+      "visual_signals": ["rectangular zone with play button or video thumbnail"],
+      "elementor_widget": "video",
+      "gutenberg_block": "core/video or core/embed",
+      "bricks_element": "video"
+    },
+    "map": {
+      "description": "Embedded map (Google Maps or similar)",
+      "html_signals": ["iframe[src*=maps.google]", "iframe[src*=openstreetmap]", ".map-embed"],
+      "figma_signals": ["Map", "Location Map", "Google Maps"],
+      "visual_signals": ["map tile image, street view style layout"],
+      "elementor_widget": "google-maps",
+      "gutenberg_block": "core/html (embed)",
+      "bricks_element": "map"
+    },
+    "accordion": {
+      "description": "Expandable/collapsible Q&A or content panels",
+      "html_signals": ["details", "summary", ".accordion", ".faq", "[data-accordion]"],
+      "figma_signals": ["Accordion", "FAQ", "Expandable", "Collapsible"],
+      "visual_signals": ["vertical list with +/- or arrow indicators, clickable headers"],
+      "elementor_widget": "accordion",
+      "gutenberg_block": "core/details",
+      "bricks_element": "accordion"
+    },
+    "tabs": {
+      "description": "Horizontal tab navigation with panel content",
+      "html_signals": ["[role=tablist]", ".tabs", ".tab-nav", "[data-tabs]"],
+      "figma_signals": ["Tabs", "Tab Bar", "Tab Panel"],
+      "visual_signals": ["horizontal row of labeled tabs, one active, content area below"],
+      "elementor_widget": "tabs",
+      "gutenberg_block": "core/html (no native tabs)",
+      "bricks_element": "tabs"
+    },
+    "testimonial": {
+      "description": "Single customer quote with author name and optional photo",
+      "html_signals": [".testimonial", ".quote", "blockquote.review", ".review"],
+      "figma_signals": ["Testimonial", "Quote", "Review", "Customer Story"],
+      "visual_signals": ["quotation marks, italic text, name + role below, optional avatar"],
+      "elementor_widget": "testimonial",
+      "gutenberg_block": "core/pullquote or core/quote",
+      "bricks_element": "testimonial"
+    },
+    "icon": {
+      "description": "Standalone icon element",
+      "html_signals": ["i.fa", "svg.icon", ".icon", "img[src$=.svg]"],
+      "figma_signals": ["Icon", "Pictogram"],
+      "visual_signals": ["small symbolic graphic, no surrounding text"],
+      "elementor_widget": "icon",
+      "gutenberg_block": "core/html",
+      "bricks_element": "icon"
+    },
+    "icon-list": {
+      "description": "Repeating card or row with icon + heading + text",
+      "html_signals": [".features", ".benefits", ".icon-box", ".feature-card"],
+      "figma_signals": ["Feature Card", "Icon List", "Icon Box", "Feature Item"],
+      "visual_signals": ["icon at top or left, bold title, body text below — repeated pattern"],
+      "elementor_widget": "icon-list or icon-box",
+      "gutenberg_block": "core/list or custom block",
+      "bricks_element": "icon-list"
+    },
+    "counter": {
+      "description": "Animated number with label (stats/achievements)",
+      "html_signals": [".counter", ".stat", ".number", "[data-count]"],
+      "figma_signals": ["Counter", "Stat", "Number", "Achievement"],
+      "visual_signals": ["large number, short label below, often in a row of 3-4"],
+      "elementor_widget": "counter",
+      "gutenberg_block": "core/html",
+      "bricks_element": "counter"
+    },
+    "progress-bar": {
+      "description": "Horizontal bar showing percentage completion or skill level",
+      "html_signals": ["progress", ".progress-bar", ".skill-bar"],
+      "figma_signals": ["Progress Bar", "Skill Bar", "Progress"],
+      "visual_signals": ["filled horizontal bar with percentage label"],
+      "elementor_widget": "progress",
+      "gutenberg_block": "core/html",
+      "bricks_element": "progress"
+    },
+    "divider": {
+      "description": "Horizontal rule or decorative separator",
+      "html_signals": ["hr", ".divider", ".separator"],
+      "figma_signals": ["Divider", "Separator", "Rule"],
+      "visual_signals": ["thin horizontal line spanning column width"],
+      "elementor_widget": "divider",
+      "gutenberg_block": "core/separator",
+      "bricks_element": "divider"
+    },
+    "spacer": {
+      "description": "Empty vertical space element",
+      "html_signals": [".spacer", "div[style*=height]", ".gap"],
+      "figma_signals": ["Spacer", "Gap"],
+      "visual_signals": ["empty zone with no content, used for vertical rhythm"],
+      "elementor_widget": "spacer",
+      "gutenberg_block": "core/spacer",
+      "bricks_element": "block (spacer)"
+    },
+    "social-icons": {
+      "description": "Row of social media icon links",
+      "html_signals": [".social-icons", ".social-links", ".social-media"],
+      "figma_signals": ["Social Icons", "Social Links", "Social Media"],
+      "visual_signals": ["row of small branded icons (Facebook, Instagram, etc.) with links"],
+      "elementor_widget": "social-icons",
+      "gutenberg_block": "core/social-links",
+      "bricks_element": "social-icons"
+    },
+    "pricing-table": {
+      "description": "Single pricing tier card with features list and CTA",
+      "html_signals": [".pricing-card", ".price-box", ".pricing-table", ".plan"],
+      "figma_signals": ["Pricing Card", "Pricing Plan", "Pricing Tier"],
+      "visual_signals": ["plan name, price with currency, feature list, CTA button — typically in a group of 3"],
+      "elementor_widget": "price-table",
+      "gutenberg_block": "core/html or plugin block",
+      "bricks_element": "pricing-table"
+    },
+    "alert": {
+      "description": "Inline notification, banner, or callout box",
+      "html_signals": [".alert", ".notice", ".callout", ".banner-bar", "[role=alert]"],
+      "figma_signals": ["Alert", "Notice", "Callout", "Banner"],
+      "visual_signals": ["colored box with icon and short message, full or partial width"],
+      "elementor_widget": "alert",
+      "gutenberg_block": "core/html",
+      "bricks_element": "alert"
+    },
+    "search": {
+      "description": "Site search input",
+      "html_signals": ["[type=search]", ".search-form", "form[role=search]"],
+      "figma_signals": ["Search", "Search Bar", "Search Input"],
+      "visual_signals": ["input field with magnifying glass icon"],
+      "elementor_widget": "search-form",
+      "gutenberg_block": "core/search",
+      "bricks_element": "search"
+    },
+    "menu": {
+      "description": "Navigation menu (primary, secondary, or footer)",
+      "html_signals": ["nav", ".menu", ".nav", ".navigation", "[role=navigation]"],
+      "figma_signals": ["Menu", "Navigation", "Nav", "Navbar"],
+      "visual_signals": ["horizontal or vertical list of page links"],
+      "elementor_widget": "nav-menu",
+      "gutenberg_block": "core/navigation",
+      "bricks_element": "nav-menu"
+    },
+    "sidebar": {
+      "description": "Widget sidebar area",
+      "html_signals": ["aside", ".sidebar", "[role=complementary]"],
+      "figma_signals": ["Sidebar", "Widget Area"],
+      "visual_signals": ["narrow vertical column with stacked widgets"],
+      "elementor_widget": "sidebar",
+      "gutenberg_block": "core/template-part",
+      "bricks_element": "sidebar"
+    },
+    "html": {
+      "description": "Custom HTML that cannot be represented by any canonical type. Use as last resort.",
+      "html_signals": ["any element not matched above"],
+      "figma_signals": ["Custom", "Embed", "Code Block"],
+      "visual_signals": ["anything not classifiable above"],
+      "elementor_widget": "html",
+      "gutenberg_block": "core/html",
+      "bricks_element": "code",
+      "note": "Always flag as important question — executor may need manual handling"
+    }
+  }
+}

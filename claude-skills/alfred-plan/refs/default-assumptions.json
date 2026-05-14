@@ -1,0 +1,64 @@
+{
+  "$comment": "Default values used by alfred-plan when source material does not provide enough signal at the current fidelity level. Executor (alfred-build) also uses these as initial widget settings.",
+
+  "colors": {
+    "primary":    "#1a73e8",
+    "secondary":  "#34a853",
+    "background": "#ffffff",
+    "text":       "#333333",
+    "accent":     "#fbbc04",
+    "border":     "#e0e0e0",
+    "heading":    "#111111"
+  },
+
+  "typography": {
+    "heading_font": "inherit",
+    "body_font": "inherit",
+    "base_size": "16px",
+    "heading_scale": "1.25",
+    "line_height": "1.6",
+    "h1_size": "48px",
+    "h2_size": "36px",
+    "h3_size": "28px",
+    "h4_size": "22px"
+  },
+
+  "spacing": {
+    "section_padding_y": "80px",
+    "section_padding_x": "0px",
+    "container_max_width": "1200px",
+    "column_gap": "30px",
+    "row_gap": "40px",
+    "block_margin_bottom": "20px"
+  },
+
+  "effects": {
+    "border_radius": "6px",
+    "button_border_radius": "4px",
+    "card_shadow": "0 4px 20px rgba(0,0,0,0.08)",
+    "transition": "0.3s ease"
+  },
+
+  "layout": {
+    "default_columns": 1,
+    "default_column_widths": ["100"],
+    "default_min_height": "auto",
+    "default_vertical_align": "center",
+    "default_section_type": "boxed",
+    "default_wp_template": "full-width"
+  },
+
+  "content": {
+    "heading_placeholder": "Section Heading",
+    "text_placeholder": "Add your content here.",
+    "button_placeholder": "Learn More",
+    "image_placeholder_alt": "Image",
+    "icon_default": "star"
+  },
+
+  "interactivity": {
+    "button_default_link": "#",
+    "button_default_target": "_self",
+    "form_default_plugin": "contact-form-7"
+  }
+}

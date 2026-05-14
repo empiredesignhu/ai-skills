@@ -1,0 +1,3 @@
+Local skill installed from `/Users/fehergergo/Desktop/Areas/AI baselines/SKILL.md`.
+
+No separate license text was provided alongside the source file at install time.

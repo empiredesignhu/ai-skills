@@ -1,0 +1,4 @@
+interface:
+  display_name: "Website QA Audit"
+  short_description: "QA live sites and Figma builds."
+  default_prompt: "Test this website end to end. If I provide a Figma link, compare the implementation to the design; otherwise audit the live site functions, links, forms, responsive behavior, and performance."

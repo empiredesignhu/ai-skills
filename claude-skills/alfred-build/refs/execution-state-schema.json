@@ -1,0 +1,94 @@
+{
+  "$comment": "Schema for execution-state.json — written by alfred-build during execution. Lives in alfred-plans/<slug>/execution-state.json. Used for progress tracking, resumption, and final reporting.",
+
+  "plan_id": "string — from build-plan.json",
+  "plan_path": "string — absolute path to build-plan.json",
+  "started_at": "ISO-8601 datetime",
+  "completed_at": "ISO-8601 datetime | null",
+
+  "status": {
+    "type": "enum",
+    "values": ["running", "complete", "stopped", "failed"],
+    "notes": "running = in progress. complete = all steps done. stopped = safe stop (resumable). failed = unrecoverable."
+  },
+
+  "overall_status": {
+    "type": "enum",
+    "values": ["review-ready", "review-ready-with-warnings", "needs-repair", "failed", null],
+    "notes": "Set at Step 7 (full-page verification). null during build."
+  },
+
+  "strategy": {
+    "type": "enum",
+    "values": ["full-page-build", "section-by-section"],
+    "notes": "Selected in Step 4."
+  },
+
+  "safety": {
+    "original_page_id": "integer | null — ID of live page if duplicated",
+    "working_page_id": "integer | null — ID of draft/duplicate being built",
+    "working_page_url": "string | null",
+    "snapshot_id": "string | null",
+    "snapshot_taken_at": "ISO-8601 | null",
+    "is_duplicate": "boolean — true if working on a copy of an existing page",
+    "force_live": "boolean — true if --force-live flag was used"
+  },
+
+  "asset_manifest": {
+    "$comment": "Map of plan asset_id → resolution result",
+    "img-001": {
+      "wp_media_id": "integer | null",
+      "wp_url": "string | null",
+      "resolution_status": "sideloaded | uploaded | stock_substituted | missing | skipped",
+      "stock_query": "string | null — query used if stock_substituted",
+      "notes": "string | null"
+    }
+  },
+
+  "widget_map": {
+    "$comment": "Map of canonical block type → resolved Elementor widget name for this build",
+    "heading": "heading",
+    "text": "text-editor",
+    "icon-list": "icon-box"
+  },
+
+  "sections": {
+    "$comment": "Per-section execution state. Key = section_id from plan.",
+    "sec-001": {
+      "status": "pending | building | built | verified | repair-failed | skipped",
+      "attempt_count": "integer — number of build+verify attempts",
+      "elementor_section_id": "string | null — actual Elementor element ID after injection",
+      "verified_at": "ISO-8601 | null",
+      "verification": {
+        "columns_ok": "boolean",
+        "block_count_ok": "boolean",
+        "block_types_ok": "boolean",
+        "content_ok": "boolean",
+        "background_ok": "boolean"
+      },
+      "issues": ["array of issue strings"]
+    }
+  },
+
+  "issues": [
+    {
+      "type": "asset_missing | html_fallback | repair_failed | pro_widget_fallback | warning",
+      "section_id": "string | null",
+      "block_id": "string | null",
+      "message": "string",
+      "blocking": "boolean"
+    }
+  ],
+
+  "tool_log": [
+    {
+      "timestamp": "ISO-8601",
+      "tool": "respira_inject_builder_content",
+      "params_summary": "sec-001 skeleton injection",
+      "result": "success | error",
+      "error_message": "string | null"
+    }
+  ],
+
+  "stop_reason": "string | null — set when status is 'stopped' or 'failed'"
+}

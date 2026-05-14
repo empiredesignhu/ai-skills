@@ -1,0 +1,416 @@
+{
+  "$comment": "Maps canonical alfred-plan block types to Elementor widget names and their required settings keys. Used by alfred-build to generate Elementor structures from build-plan.json.",
+  "version": "1.0",
+  "target_builder": "elementor",
+
+  "widgets": {
+    "heading": {
+      "elementor_widget": "heading",
+      "settings_keys": {
+        "title": "title",
+        "title_html_tag": "header_size",
+        "align": "align",
+        "color": "title_color",
+        "typography_font_family": "typography_font_family",
+        "typography_font_size": "typography_font_size",
+        "typography_font_weight": "typography_font_weight",
+        "typography_line_height": "typography_line_height"
+      },
+      "header_size_map": {
+        "xl": "h1",
+        "lg": "h2",
+        "md": "h3",
+        "sm": "h4",
+        "xs": "h5"
+      },
+      "defaults": {
+        "header_size": "h2",
+        "align": "left"
+      },
+      "notes": "Use header_size_map to convert plan style.size to h1-h6 tag."
+    },
+
+    "text": {
+      "elementor_widget": "text-editor",
+      "settings_keys": {
+        "editor": "editor",
+        "align": "align",
+        "color": "_css_custom_color"
+      },
+      "defaults": {
+        "align": "left"
+      },
+      "notes": "content.text maps to editor. Supports basic HTML formatting."
+    },
+
+    "image": {
+      "elementor_widget": "image",
+      "settings_keys": {
+        "image_url": "image.url",
+        "image_id": "image.id",
+        "alt_text": "image.alt",
+        "size": "image_size",
+        "align": "align",
+        "link": "link.url"
+      },
+      "defaults": {
+        "image_size": "full",
+        "align": "center"
+      },
+      "notes": "Use asset_manifest to resolve asset_id → wp_media_id for image.id. If wp_media_id is null, use placeholder image URL."
+    },
+
+    "button": {
+      "elementor_widget": "button",
+      "settings_keys": {
+        "text": "text",
+        "link_url": "link.url",
+        "link_target": "link.is_external",
+        "align": "align",
+        "background_color": "button_background_color",
+        "text_color": "button_text_color",
+        "border_radius": "border_radius",
+        "typography_font_size": "typography_font_size",
+        "typography_font_weight": "typography_font_weight"
+      },
+      "defaults": {
+        "align": "left",
+        "link.url": "#",
+        "link.is_external": false
+      },
+      "notes": "interactivity.target maps to link.url."
+    },
+
+    "form": {
+      "elementor_widget": "form",
+      "settings_keys": {
+        "form_fields": "form_fields",
+        "submit_text": "button_text",
+        "email_to": "email_to"
+      },
+      "defaults": {
+        "button_text": "Küldés",
+        "email_to": ""
+      },
+      "notes": "Elementor Pro required for native form widget. If Elementor Free only: use 'html' widget fallback with shortcode placeholder for CF7/WPForms. Flag in execution issues.",
+      "requires_pro": true,
+      "fallback_widget": "html",
+      "fallback_notes": "Insert [contact-form-7 id='placeholder'] shortcode if CF7 active"
+    },
+
+    "gallery": {
+      "elementor_widget": "image-gallery",
+      "settings_keys": {
+        "gallery": "gallery",
+        "gallery_columns": "gallery_columns",
+        "gallery_rand": "gallery_rand",
+        "link_to": "link_to"
+      },
+      "defaults": {
+        "gallery_columns": "3",
+        "link_to": "none"
+      },
+      "notes": "gallery items map to an array of {id, url} from asset_manifest."
+    },
+
+    "slider": {
+      "elementor_widget": "image-carousel",
+      "settings_keys": {
+        "carousel": "carousel",
+        "slides_per_view": "slides_to_show",
+        "autoplay": "autoplay",
+        "autoplay_speed": "autoplay_speed",
+        "navigation": "navigation"
+      },
+      "defaults": {
+        "slides_to_show": "1",
+        "autoplay": "yes",
+        "autoplay_speed": 5000,
+        "navigation": "arrows"
+      },
+      "notes": "For testimonial sliders use 'testimonial-carousel' widget (Elementor Pro) or fall back to 'testimonial' widgets in a grid."
+    },
+
+    "video": {
+      "elementor_widget": "video",
+      "settings_keys": {
+        "video_type": "video_type",
+        "youtube_url": "youtube_url",
+        "vimeo_url": "vimeo_url",
+        "hosted_url": "hosted_url",
+        "autoplay": "autoplay",
+        "mute": "mute",
+        "loop": "loop"
+      },
+      "defaults": {
+        "video_type": "youtube",
+        "autoplay": "",
+        "mute": "",
+        "loop": ""
+      },
+      "notes": "content.text is the video URL. Detect type from URL pattern: youtube.com/youtu.be → 'youtube', vimeo.com → 'vimeo', else 'hosted'."
+    },
+
+    "map": {
+      "elementor_widget": "google-maps",
+      "settings_keys": {
+        "address": "address",
+        "zoom": "zoom",
+        "height": "height"
+      },
+      "defaults": {
+        "zoom": 10,
+        "height": { "size": 300, "unit": "px" }
+      },
+      "notes": "content.text is the iframe src URL — extract address from it or use plan content directly."
+    },
+
+    "accordion": {
+      "elementor_widget": "accordion",
+      "settings_keys": {
+        "tabs": "tabs",
+        "title_html_tag": "title_html_tag",
+        "border_width": "border_width"
+      },
+      "item_schema": {
+        "tab_title": "question",
+        "tab_content": "answer"
+      },
+      "defaults": {
+        "title_html_tag": "p",
+        "border_width": 1
+      },
+      "notes": "content.items array maps to tabs array. Each item: {tab_title, tab_content}."
+    },
+
+    "tabs": {
+      "elementor_widget": "tabs",
+      "settings_keys": {
+        "tabs": "tabs"
+      },
+      "item_schema": {
+        "tab_title": "label",
+        "tab_content": "body"
+      },
+      "defaults": {},
+      "notes": "content.items array maps to tabs array."
+    },
+
+    "testimonial": {
+      "elementor_widget": "testimonial",
+      "settings_keys": {
+        "testimonial_content": "testimonial_content",
+        "testimonial_name": "testimonial_name",
+        "testimonial_job": "testimonial_job",
+        "testimonial_image": "testimonial_image",
+        "alignment": "alignment"
+      },
+      "defaults": {
+        "alignment": "center"
+      },
+      "notes": "For multiple testimonials: use one 'testimonial' widget per content.items entry, placed in grid columns. If Elementor Pro: use testimonial-carousel.",
+      "multi_item_strategy": "repeat_widget_in_grid"
+    },
+
+    "icon": {
+      "elementor_widget": "icon",
+      "settings_keys": {
+        "icon": "icon",
+        "size": "size",
+        "color": "primary_color",
+        "link": "link.url"
+      },
+      "defaults": {
+        "icon": { "library": "fa-solid", "value": "fa fa-star" },
+        "size": { "size": 40, "unit": "px" }
+      },
+      "notes": "If content.asset_ref is an SVG, use the 'html' widget with inline SVG instead."
+    },
+
+    "icon-list": {
+      "elementor_widget": "icon-box",
+      "settings_keys": {
+        "title_text": "title_text",
+        "description_text": "description_text",
+        "icon": "selected_icon",
+        "icon_size": "icon_size",
+        "title_color": "title_color",
+        "description_color": "description_color"
+      },
+      "defaults": {
+        "selected_icon": { "library": "fa-solid", "value": "fa fa-check" },
+        "icon_size": { "size": 32, "unit": "px" }
+      },
+      "notes": "Each content.items entry = one icon-box widget. Place in grid columns inside section. title_text = item.title, description_text = item.text."
+    },
+
+    "counter": {
+      "elementor_widget": "counter",
+      "settings_keys": {
+        "starting_number": "starting_number",
+        "ending_number": "ending_number",
+        "prefix": "prefix",
+        "suffix": "suffix",
+        "title": "title"
+      },
+      "defaults": {
+        "starting_number": 0,
+        "duration": 2000
+      },
+      "notes": "content.items[n].number → ending_number. content.items[n].label → title."
+    },
+
+    "progress-bar": {
+      "elementor_widget": "progress",
+      "settings_keys": {
+        "title": "title",
+        "percent": "percent",
+        "color": "bar_color",
+        "background_color": "bar_bg_color"
+      },
+      "defaults": {
+        "percent": { "size": 50, "unit": "%" }
+      }
+    },
+
+    "divider": {
+      "elementor_widget": "divider",
+      "settings_keys": {
+        "style": "style",
+        "weight": "weight",
+        "color": "color",
+        "gap": "gap"
+      },
+      "defaults": {
+        "style": "solid",
+        "weight": { "size": 1, "unit": "px" }
+      }
+    },
+
+    "spacer": {
+      "elementor_widget": "spacer",
+      "settings_keys": {
+        "space": "space"
+      },
+      "defaults": {
+        "space": { "size": 40, "unit": "px" }
+      },
+      "notes": "Use style.custom_notes height value if present."
+    },
+
+    "social-icons": {
+      "elementor_widget": "social-icons",
+      "settings_keys": {
+        "social_icon_list": "social_icon_list"
+      },
+      "item_schema": {
+        "social_icon": "network_to_icon",
+        "link": { "url": "url" }
+      },
+      "network_to_icon": {
+        "linkedin": { "library": "fa-brands", "value": "fab fa-linkedin" },
+        "facebook": { "library": "fa-brands", "value": "fab fa-facebook" },
+        "instagram": { "library": "fa-brands", "value": "fab fa-instagram" },
+        "twitter": { "library": "fa-brands", "value": "fab fa-twitter" },
+        "youtube": { "library": "fa-brands", "value": "fab fa-youtube" },
+        "tiktok": { "library": "fa-brands", "value": "fab fa-tiktok" }
+      },
+      "defaults": {}
+    },
+
+    "pricing-table": {
+      "elementor_widget": "price-table",
+      "settings_keys": {
+        "heading": "heading",
+        "price": "price",
+        "period": "period",
+        "features_list": "features_list",
+        "button_text": "button_text",
+        "button_url": "button_url"
+      },
+      "defaults": {
+        "button_text": "Választom"
+      },
+      "requires_pro": true,
+      "fallback_widget": "html",
+      "fallback_notes": "Build a styled HTML pricing card if Elementor Free"
+    },
+
+    "alert": {
+      "elementor_widget": "alert",
+      "settings_keys": {
+        "alert_type": "alert_type",
+        "alert_title": "alert_title",
+        "alert_description": "alert_description"
+      },
+      "defaults": {
+        "alert_type": "info"
+      }
+    },
+
+    "search": {
+      "elementor_widget": "search-form",
+      "settings_keys": {
+        "placeholder": "placeholder",
+        "button_type": "button_type"
+      },
+      "defaults": {
+        "placeholder": "Keresés...",
+        "button_type": "icon"
+      }
+    },
+
+    "menu": {
+      "elementor_widget": "nav-menu",
+      "settings_keys": {
+        "menu": "menu",
+        "layout": "layout",
+        "align_items": "align_items"
+      },
+      "defaults": {
+        "layout": "horizontal",
+        "align_items": "center"
+      },
+      "notes": "Requires a WordPress menu to exist. If content.items are provided, create the WP menu first via respira_create_menu + respira_create_menu_item, then assign. If menu already exists by name, use it."
+    },
+
+    "sidebar": {
+      "elementor_widget": "sidebar",
+      "settings_keys": {
+        "sidebar": "sidebar"
+      },
+      "defaults": {
+        "sidebar": "sidebar-1"
+      }
+    },
+
+    "html": {
+      "elementor_widget": "html",
+      "settings_keys": {
+        "html": "html"
+      },
+      "defaults": {},
+      "notes": "Last resort. content.html maps directly to the html field. Always flag as 'html-fallback' in execution issues for post-build review."
+    }
+  },
+
+  "section_settings": {
+    "notes": "Section-level Elementor settings mapped from plan layout fields.",
+    "fields": {
+      "layout.type=full-width":    { "layout": "full_width" },
+      "layout.type=boxed":         { "layout": "boxed" },
+      "layout.min_height":         { "custom_height_type": "min-height", "custom_height": "<value>" },
+      "layout.vertical_align":     { "content_position": "<top|center|bottom>" },
+      "layout.background.type=color":    { "background_background": "classic", "background_color": "<value>" },
+      "layout.background.type=image":    { "background_background": "classic", "background_image": { "url": "<url>", "id": "<media_id>" } },
+      "layout.background.type=gradient": { "background_background": "gradient" },
+      "layout.background.type=video":    { "background_background": "video", "background_video_link": "<url>" },
+      "layout.background.overlay":       { "background_overlay_background": "classic", "background_overlay_color": "<color>", "background_overlay_opacity": "<0-1 as 0-100>" }
+    }
+  },
+
+  "column_width_map": {
+    "notes": "Maps plan column_widths percentage values to Elementor _column_size values (out of 100).",
+    "conversion": "Use the plan column_widths array directly — Elementor uses the same percentage system."
+  }
+}
